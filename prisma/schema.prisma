@@ -21,4 +21,23 @@ model Role {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   deleted     Boolean  @default(false)
+
+  // One-to-many relation to User
+  users       User[]   @relation("RoleUsers")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deleted   Boolean  @default(false)
+
+  // Foreign key to Role (optional)
+  roleId    String?
+  role      Role?    @relation("RoleUsers", fields: [roleId], references: [id])
+
+  @@index([roleId])
 }
