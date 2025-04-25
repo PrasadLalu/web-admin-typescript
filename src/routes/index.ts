@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
-import roleRoutes from './role';
-import authRoutes from './auth';
-import userRoutes from './user';
+import roleRoutes from './role.router';
+import authRoutes from './auth.router';
+import userRoutes from './user.router';
 
 const router = Router();
 
