@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { MESSAGES } from '@constant';
+import { MESSAGES } from '@constants';
 import { created, success, notFound, conflict, noContent } from '@statusCode';
 
 const prisma = new PrismaClient();

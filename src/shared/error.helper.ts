@@ -1,7 +1,7 @@
 import logger from '@logger';
-import AppError from '../errors/AppError';
+import AppError from './app.error';
 
-class ErrorHelper {
+export class ErrorHelper {
     static error(error: unknown): AppError {
         if (error instanceof AppError) {
             logger.error(error);
@@ -13,5 +13,3 @@ class ErrorHelper {
         return new AppError(message);
     }
 }
-
-export default ErrorHelper;

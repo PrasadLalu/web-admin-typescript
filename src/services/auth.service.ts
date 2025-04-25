@@ -1,8 +1,8 @@
 import { omit } from 'lodash';
 import { PrismaClient } from '@prisma/client';
-import { MESSAGES } from '@constant';
+import { MESSAGES } from '@constants';
 import { created, success, notFound, conflict, unauthorized } from '@statusCode';
-import { hashPassword, comparePasswords, generateToken } from '../utils/common';
+import { hashPassword, comparePasswords, generateToken } from '@utils';
 
 const prisma = new PrismaClient();
 

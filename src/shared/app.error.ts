@@ -1,5 +1,5 @@
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
-import { MESSAGES } from '@constant';
+import { MESSAGES } from '@constants';
 
 class AppError extends Error {
     public code: number;

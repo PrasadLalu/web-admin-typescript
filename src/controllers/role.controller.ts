@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { RoleService } from '@services';
-import ErrorHelper from '../helpers/error.helper';
+import { ErrorHelper} from '@errorHelper';
 
 export class RoleController {
     private roleService: RoleService;

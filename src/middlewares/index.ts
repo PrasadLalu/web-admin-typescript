@@ -1,1 +1,1 @@
-export * from './joi.middleware';
+export * from './joi-validator.middleware';

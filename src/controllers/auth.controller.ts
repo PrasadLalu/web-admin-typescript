@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthService } from '@services';
-import ErrorHelper from '../helpers/error.helper';
+import { ErrorHelper} from '@errorHelper';
 
 export class AuthController {
     private authService: AuthService;

@@ -68,10 +68,11 @@
     "@utils": "dist/utils",
     "@schemas": "dist/schemas",
     "@services": "dist/services",
-    "@logger": "dist/utils/logger",
+    "@logger": "dist/shared/logger",
     "@controllers": "dist/controllers",
     "@middlewares": "dist/middlewares",
-    "@constant": "dist/utils/constant",
-    "@statusCode": "dist/utils/statusCode"
+    "@constants": "dist/shared/constants",
+    "@errorHelper": "dist/shared/error.helper",
+    "@statusCode": "dist/shared/status-code"
   }
 }

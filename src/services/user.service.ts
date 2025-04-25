@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { notFound, success } from '@statusCode';
-import { MESSAGES } from '@constant';
-import {selectUserFields} from '../utils/userUtil';
+import { MESSAGES } from '@constants';
+import { selectUserFields } from '@utils';
 
 const prisma = new PrismaClient();
 
