@@ -1,5 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import logger from '@logger';
+import { TokenPayload } from '@types';
+
+const SECRET: string = process.env.JWT_SECRET || '';
 
 export const hashPassword = async (plainPassword: string): Promise<string> => {
     const salt = await bcrypt.genSalt(10);
@@ -10,6 +14,9 @@ export const comparePasswords = async (plainPassword: string, hashedPassword: st
     return bcrypt.compare(plainPassword, hashedPassword);
 };
 
-export const generateToken = async (payload: any) => {
-    return jwt.sign(payload, 'secret', { expiresIn: '1h' });
+export const generateToken = async (payload: TokenPayload, secret = SECRET) => {
+    if (!secret) {
+        logger.warn('🔑 JWT Secret not found!');
+    }
+    return jwt.sign(payload, secret, { expiresIn: '1h' });
 };

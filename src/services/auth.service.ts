@@ -3,12 +3,13 @@ import { PrismaClient } from '@prisma/client';
 import { MESSAGES } from '@constants';
 import { created, success, notFound, conflict, unauthorized } from '@statusCode';
 import { hashPassword, comparePasswords, generateToken } from '@utils';
+import { LoginUserRequestDto, RegisterUserRequestDto } from '@types';
 
 const prisma = new PrismaClient();
 
 export class AuthService {
     constructor() { }
-    async registerUser(body: any) {
+    async registerUser(body: RegisterUserRequestDto) {
         const { name, email, password, roleId } = body;
 
         // Check if user already exists
@@ -49,7 +50,7 @@ export class AuthService {
         return { ...created, data: user };
     }
 
-    async loginUser(body: any) {
+    async loginUser(body: LoginUserRequestDto) {
         const { email, password } = body;
 
         // Check user by email
@@ -65,7 +66,7 @@ export class AuthService {
         }
 
         // Generate token
-        const token = generateToken({ id: user.id, email: user.email });
+        const token = await generateToken({ id: user.id, email });
 
         const sanitizedUser = omit(user, ['password']);
         return {
@@ -73,6 +74,5 @@ export class AuthService {
             data: sanitizedUser,
             token,
         };
-
     }
 }

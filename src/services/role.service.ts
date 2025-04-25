@@ -1,13 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { MESSAGES } from '@constants';
 import { created, success, notFound, conflict, noContent } from '@statusCode';
+import { CreateRoleDto } from '@types';
 
 const prisma = new PrismaClient();
 
 export class RoleService {
     constructor() { }
 
-    async create(body: any) {
+    async create(body: CreateRoleDto) {
         const { name, description } = body;
 
         // Check if role already exists
