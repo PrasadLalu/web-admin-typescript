@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import UserService from '../services/UserService';
+import { UserService } from '@services';
 import ErrorHelper from '../helpers/error.helper';
 
-class UserController {
+export class UserController {
     private userService: UserService;
 
     constructor() {
@@ -30,5 +30,3 @@ class UserController {
         }
     }
 }
-
-export default UserController;

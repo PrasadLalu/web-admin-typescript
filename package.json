@@ -66,7 +66,11 @@
   "_moduleAliases": {
     "@root": ".",
     "@utils": "dist/utils",
+    "@schemas": "dist/schemas",
+    "@services": "dist/services",
     "@logger": "dist/utils/logger",
+    "@controllers": "dist/controllers",
+    "@middlewares": "dist/middlewares",
     "@constant": "dist/utils/constant",
     "@statusCode": "dist/utils/statusCode"
   }

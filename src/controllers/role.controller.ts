@@ -1,12 +1,17 @@
 import { Request, Response } from 'express';
-import roleService from '../services/roleService';
+import { RoleService } from '@services';
 import ErrorHelper from '../helpers/error.helper';
 
-class RoleController {
-    static async create(request: Request, response: Response): Promise<void> {
+export class RoleController {
+    private roleService: RoleService;
+    constructor() {
+        this.roleService = new RoleService();
+    }
+
+    async create(request: Request, response: Response): Promise<void> {
         try {
             const { body } = request;
-            const result = await roleService.create(body);
+            const result = await this.roleService.create(body);
             response.status(result.code).send(result);
         } catch (error) {
             const appError = ErrorHelper.error(error);
@@ -14,9 +19,9 @@ class RoleController {
         }
     }
 
-    static async findAll(request: Request, response: Response): Promise<void> {
+    async findAll(request: Request, response: Response): Promise<void> {
         try {
-            const result = await roleService.findAll();
+            const result = await this.roleService.findAll();
             response.status(result.code).send(result);
         } catch (error) {
             const appError = ErrorHelper.error(error);
@@ -24,21 +29,21 @@ class RoleController {
         }
     }
 
-    static async findById(request: Request, response: Response): Promise<void> {
-        try {
-            const { id } = request.params;
-            const result = await roleService.findById(id);
-            response.status(result.code).send(result);
-        } catch (error) {
-            const appError = ErrorHelper.error(error);
-            response.status(appError.code).send(appError);
-        }
-    }
-
-    static async deleteById(request: Request, response: Response): Promise<void> {
+    async findById(request: Request, response: Response): Promise<void> {
         try {
             const { id } = request.params;
-            const result = await roleService.deleteById(id);
+            const result = await this.roleService.findById(id);
+            response.status(result.code).send(result);
+        } catch (error) {
+            const appError = ErrorHelper.error(error);
+            response.status(appError.code).send(appError);
+        }
+    }
+
+    async deleteById(request: Request, response: Response): Promise<void> {
+        try {
+            const { id } = request.params;
+            const result = await this.roleService.deleteById(id);
             response.status(result.code).send(result);
         } catch (error) {
             const appError = ErrorHelper.error(error);
@@ -46,5 +51,3 @@ class RoleController {
         }
     }
 }
-
-export default RoleController;

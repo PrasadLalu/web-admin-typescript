@@ -39,11 +39,6 @@ app.set('view engine', 'ejs');
 // Mount api routes
 app.use('/api/v1', apiRoutes);
 
-app.use((req, res, next) => {
-    console.log("----------------------------------------")
-    next(new Error('Something went wrong'));
-  });
-
 // Create server and listen
 http
     .createServer(app)

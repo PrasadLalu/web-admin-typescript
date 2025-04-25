@@ -1,12 +1,18 @@
 import { Request, Response } from 'express';
-import authService from '../services/authService';
+import { AuthService } from '@services';
 import ErrorHelper from '../helpers/error.helper';
 
-class AuthController {
-    static async login(request: Request, response: Response): Promise<void> {
+export class AuthController {
+    private authService: AuthService;
+
+    constructor() {
+        this.authService = new AuthService();
+    }
+
+    async login(request: Request, response: Response): Promise<void> {
         try {
             const { body } = request;
-            const result = await authService.loginUser(body);
+            const result = await this.authService.loginUser(body);
             response.status(result.code).send(result);
         } catch (error) {
             const appError = ErrorHelper.error(error);
@@ -14,10 +20,10 @@ class AuthController {
         }
     }
 
-    static async register(request: Request, response: Response): Promise<void> {
+    async register(request: Request, response: Response): Promise<void> {
         try {
             const { body } = request;
-            const result = await authService.registerUser(body);
+            const result = await this.authService.registerUser(body);
             response.status(result.code).send(result);
         } catch (error) {
             const appError = ErrorHelper.error(error);
@@ -25,5 +31,3 @@ class AuthController {
         }
     }
 }
-
-export default AuthController;

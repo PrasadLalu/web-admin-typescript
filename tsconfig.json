@@ -16,11 +16,23 @@
             "@utils": [
                 "src/utils/*"
             ],
+            "@services": [
+                "src/services/index.ts"
+            ],
+            "@schemas": [
+                "src/schemas/index.ts"
+            ],
             "@logger": [
                 "src/utils/logger.ts"
             ],
             "@constant": [
                 "src/utils/constant.ts"
+            ],
+            "@controllers": [
+                "src/controllers/index.ts"
+            ],
+            "@middlewares": [
+                "src/middlewares/index.ts"
             ],
             "@statusCode": [
                 "src/utils/statusCode.ts"

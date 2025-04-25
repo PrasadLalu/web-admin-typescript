@@ -5,7 +5,7 @@ import {selectUserFields} from '../utils/userUtil';
 
 const prisma = new PrismaClient();
 
-class UserService {
+export class UserService {
     constructor() {}
 
     async findAll() {
@@ -33,6 +33,4 @@ class UserService {
 
         return { ...success, data: user };
     }
-}
-
-export default UserService;
+};
