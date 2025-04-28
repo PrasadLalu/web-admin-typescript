@@ -1,33 +1,44 @@
 import { PrismaClient } from '@prisma/client';
 import { notFound, success } from '@statusCode';
 import { MESSAGES } from '@constants';
-import { selectUserFields } from '@utils';
+import { selectUserFields, getPaginationParams, activeUserWhere } from '@utils';
 
 const prisma = new PrismaClient();
 
 export class UserService {
-    constructor() {}
+    constructor() { }
 
-    async findAll() {
-        const users = await prisma.user.findMany({
-            where: {
-                isBanned: false,
-                isDeleted: false,
-            },
-            select: selectUserFields(),
-            orderBy: {
-                updatedAt: 'desc',
+    async findAll(query: any) {
+        const { page, perPage } = getPaginationParams(query);
+        const skip = (page - 1) * perPage;
+
+        const [users, total] = await prisma.$transaction([
+            prisma.user.findMany({
+                where: activeUserWhere,
+                skip,
+                take: perPage,
+                select: selectUserFields(),
+                orderBy: { updatedAt: 'desc' },
+            }),
+            prisma.user.count({ where: activeUserWhere }),
+        ]);
+
+        return {
+            ...success, data: users,
+            pagination: {
+                page,
+                perPage,
+                total,
+                totalPages: Math.ceil(total / perPage),
             }
-        });
-
-        return { ...success, data: users };
+        };
     }
 
     async findById(id: string) {
         const user = await prisma.user.findUnique({
-            where: { 
+            where: {
                 id,
-                isBanned: false, 
+                isBanned: false,
                 isDeleted: false,
             },
             select: selectUserFields(),

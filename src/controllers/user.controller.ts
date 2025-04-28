@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService } from '@services';
-import { ErrorHelper} from '@errorHelper';
+import { ErrorHelper } from '@errorHelper';
 
 export class UserController {
     private userService: UserService;
@@ -11,7 +11,8 @@ export class UserController {
 
     async findAll(request: Request, response: Response): Promise<void> {
         try {
-            const result = await this.userService.findAll();
+            const { query } = request;
+            const result = await this.userService.findAll(query);
             response.status(result.code).send(result);
             return;
         } catch (error) {

@@ -7,3 +7,6 @@ export const MESSAGES = {
     MISMATCHED_PASSWORD: 'Mismatched password',
     SOMETHING_WENT_WRONG: 'Something went wrong',
 } as const;
+
+export const PAGE = 1;
+export const PER_PAGE = 10;
