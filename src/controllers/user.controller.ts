@@ -13,9 +13,11 @@ export class UserController {
         try {
             const result = await this.userService.findAll();
             response.status(result.code).send(result);
+            return;
         } catch (error) {
             const appError = ErrorHelper.error(error);
             response.status(appError.code).send(appError);
+            return;
         }
     }
 
@@ -24,9 +26,11 @@ export class UserController {
             const { id } = request.params;
             const result = await this.userService.findById(id);
             response.status(result.code).send(result);
+            return;
         } catch (error) {
             const appError = ErrorHelper.error(error);
             response.status(appError.code).send(appError);
+            return;
         }
     }
 }

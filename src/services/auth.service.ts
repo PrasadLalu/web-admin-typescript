@@ -26,7 +26,7 @@ export class AuthService {
         const role = await prisma.role.findUnique({
             where: {
                 id: roleId,
-                deleted: false,
+                isDeleted: false,
             }
         });
         if (!role) {

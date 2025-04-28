@@ -14,9 +14,11 @@ export class AuthController {
             const { body } = request;
             const result = await this.authService.loginUser(body);
             response.status(result.code).send(result);
+            return;
         } catch (error) {
             const appError = ErrorHelper.error(error);
             response.status(appError.code).send(appError);
+            return;
         }
     }
 
@@ -25,9 +27,11 @@ export class AuthController {
             const { body } = request;
             const result = await this.authService.registerUser(body);
             response.status(result.code).send(result);
+            return;
         } catch (error) {
             const appError = ErrorHelper.error(error);
             response.status(appError.code).send(appError);
+            return;
         }
     }
 }

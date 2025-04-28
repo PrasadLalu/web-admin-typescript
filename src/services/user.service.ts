@@ -11,7 +11,8 @@ export class UserService {
     async findAll() {
         const users = await prisma.user.findMany({
             where: {
-                deleted: false,
+                isBanned: false,
+                isDeleted: false,
             },
             select: selectUserFields(),
             orderBy: {
@@ -24,7 +25,11 @@ export class UserService {
 
     async findById(id: string) {
         const user = await prisma.user.findUnique({
-            where: { id, deleted: false },
+            where: { 
+                id,
+                isBanned: false, 
+                isDeleted: false,
+            },
             select: selectUserFields(),
         });
         if (!user) {

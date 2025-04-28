@@ -39,7 +39,7 @@ export class RoleService {
     async findAll() {
         const roles = await prisma.role.findMany({
             where: {
-                deleted: false,
+                isDeleted: false,
             },
             orderBy: {
                 updatedAt: 'desc',
@@ -82,7 +82,7 @@ export class RoleService {
         await prisma.role.update({
             where: { id },
             data: {
-                deleted: true,
+                isDeleted: true,
             },
         });
 

@@ -14,6 +14,7 @@ export const joiValidator = (schema: ObjectSchema) => (req: Request, res: Respon
             status: 'failed',
             errors: messages,
         });
+        return;
     }
     next();
 };
